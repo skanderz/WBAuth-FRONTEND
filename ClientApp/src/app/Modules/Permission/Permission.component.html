@@ -1,0 +1,138 @@
+      <div class="background-titre"> <h1> GESTION DES PERMISSIONS </h1> </div>
+      <div class="centered-element">
+
+        <h4 *ngIf="!read" style="margin-top:100px" class="alert alert-danger" role="alert">
+          Accès refusé : Vous n'êtes pas autorisé à consulter la liste des permissions !
+        </h4>
+
+        <div *ngIf="read" class="content">
+
+          <div class="search-bar-and-add">
+            <button *ngIf="add" class="add-button" [routerLink]="['/Permission/AjouterPermission']">
+              <i class="fas fa-plus" style="color: #1ddd92;"></i>  &nbsp;  AJOUTER
+            </button>
+            <input [(ngModel)]="rechFonctionMulti" (input)="RechMultiFonction()" class="search-input" type="text" placeholder="Rechercher...">
+            <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
+          </div>
+          <br />
+
+          <div class="choix-application">
+            <label style="transform:translateX(-3px)" for="nom">APPLICATION :</label>
+            <select id="IdApp" name="IdApp" [(ngModel)]="rechApp" (ngModelChange)="getSelectedApplicationId()">
+              <option *ngFor="let app of applications" [value]="app.nom">{{ app.nom }}</option>
+            </select>
+
+            <label style="transform:translateX(-3px)" for="nom">RÔLE :</label>
+            <select id="IdRole" name="IdRole" [(ngModel)]="rechRole" (ngModelChange)="getSelectedRoleId()">
+              <option *ngFor="let role of roles" [value]="role.nom">{{ role.nom }} ( Niveau {{ role.niveau }} )</option>
+            </select>
+          </div>
+
+
+          <div style="white-space:nowrap ; border: 1.5px solid #349AB5; border-radius:4px; padding:4px; font-weight:600;
+                 display:flex; align-items:center ">
+            <button (click)="scrollToTable2()" class="add-button" style="padding:8.5px;"> <i class="fa-solid fa-angles-down" style="color:gold;"></i> </button>
+            <div style="margin:auto;"> TABLEAU MULTI-FONCTIONS </div>
+          </div>
+          <br />
+
+
+          <table class="tableMultiPerms" aria-labelledby="tableLabel" *ngIf="multiPermissions" #table1>
+            <thead>
+              <tr>
+                <th></th>
+                <th>LECTURE</th>
+                <th>AJOUT</th>
+                <th>MODIFICATION</th>
+                <th>SUPPRESSION</th>
+                <th>IMPRESSION</th>
+                <th>EXPORTATION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let permission of multiPermissions">
+                <td>
+                  <i *ngIf="modify" (click)="onModifierClick(permission.id)" [routerLink]="['/Permission/ModifierPermission']" class="far fa-edit" style="color: #e6c347;"></i>
+                  <i *ngIf="delete" (click)="deletePermission(permission.id)" class="far fa-trash-alt" style="color:red; margin:0px 7px 0px 7px;"></i> {{ permission.nom }}
+                </td>
+
+                <td class="acces" (click)="onModifierAccesFonctionMulti(0,permission ,$event)" style="display:flex; justify-content:center; cursor:pointer;">
+                  <span class="no-select" appCellStyle="{{ permission.status[0] === '0' ? '✖' : '✔' }}">{{ permission.status[0] === '0' ? '✖' : '✔' }}</span>
+                </td>
+
+                <td class="acces" (click)="onModifierAccesFonctionMulti(1,permission ,$event)" style="position:relative; cursor:pointer;">
+                  <span class="no-select" appCellStyle="{{ permission.status[1] === '0' ? '✖' : '✔' }}"
+                        style="position:relative; left:45%;">{{ permission.status[1] === '0' ? '✖' : '✔' }}</span>
+                </td>
+
+                <td class="acces" (click)="onModifierAccesFonctionMulti(2,permission ,$event)" style="display:flex; justify-content:center; cursor:pointer;">
+                  <span class="no-select" appCellStyle="{{ permission.status[2] === '0' ? '✖' : '✔' }}">{{ permission.status[2] === '0' ? '✖' : '✔' }}</span>
+                </td>
+
+                <td class="acces" (click)="onModifierAccesFonctionMulti(3,permission ,$event)" style="position:relative; cursor:pointer;">
+                  <span class="no-select" appCellStyle="{{ permission.status[3] === '0' ? '✖' : '✔' }}"
+                        style="position: relative; left: 45%;">{{ permission.status[3] === '0' ? '✖' : '✔' }}</span>
+                </td>
+
+                <td class="acces" (click)="onModifierAccesFonctionMulti(4,permission ,$event)" style="display:flex; justify-content:center; cursor:pointer;">
+                  <span class="no-select" appCellStyle="{{ permission.status[4] === '0' ? '✖' : '✔' }}">{{ permission.status[4] === '0' ? '✖' : '✔' }}</span>
+                </td>
+
+                <td class="acces" (click)="onModifierAccesFonctionMulti(5,permission ,$event)" style="position:relative; cursor:pointer;">
+                  <span class="no-select" appCellStyle="{{ permission.status[5] === '0' ? '✖' : '✔' }}"
+                        style="position: relative; left: 45%;">{{ permission.status[5] === '0' ? '✖' : '✔' }}</span>
+                </td>
+
+              </tr>
+            </tbody>
+
+
+          </table>
+          <br /><br /><br /><br />
+
+
+          <!--------------------------------------------------------------------------------------------------------------------------------------------------------->
+          <hr style="color:aqua;" />
+          <div class="search-bar-and-add">
+            <button *ngIf="add" class="add-button" [routerLink]="['/Permission/AjouterPermission']">
+              <i class="fas fa-plus" style="color: #1ddd92;"></i>  &nbsp;  AJOUTER
+            </button>
+            <input [(ngModel)]="rechFonctionUnique" (input)="RechFonctionUnique()" class="search-input" type="text" placeholder="Rechercher...">
+            <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
+          </div>
+          <br />
+
+          <div style="white-space:nowrap ; border: 1.5px solid #349AB5; border-radius:4px; padding:4px; font-weight:600;
+                 display:flex; align-items:center ">
+            <button (click)="scrollToTable1()" class="add-button" style="padding:8.5px;"> <i class="fa-solid fa-angles-up" style="color:gold;"></i> </button>
+            <div style="margin:auto;"> TABLEAU DE FONCTION UNIQUE </div>
+          </div>
+          <br />
+
+
+          <table aria-labelledby="tableLabel" *ngIf="uniquePermissions" #table2>
+            <thead>
+              <tr>
+                <th></th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let permission of uniquePermissions">
+                <td>
+                  <i *ngIf="modify" (click)="onModifierClick(permission.id)" [routerLink]="['/Permission/ModifierPermission']" class="far fa-edit" style="color: #e6c347;"></i>
+                  <i *ngIf="delete" (click)="deletePermission(permission.id)" class="far fa-trash-alt" style="color:red; margin:0px 7px 0px 7px;"></i> {{ permission.nom }}
+                </td>
+                <td class="acces" (click)="onModifierAccesFonctionUnique(permission ,$event)" style="position:relative; cursor:pointer;">
+                  <span class="no-select" appCellStyle="{{ permission.status === '0' ? '✖' : '✔' }}"
+                        style="position: relative; left: 45%;">{{ permission.status === '0' ? '✖' : '✔' }}</span>
+                </td>
+              </tr>
+            </tbody>
+
+
+
+          </table>
+        </div>
+      </div>
+

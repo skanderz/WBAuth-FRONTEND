@@ -1,0 +1,53 @@
+<div class="background-titre"> <h1> GESTION DES RÔLES </h1> </div>
+
+
+<div class="ajouter-content">
+
+  <div class="ajouter-entete">
+    <div class="ajouter-return" [routerLink]="['/Role']"> <i class="fa-solid fa-angles-left"></i> RETURN </div>
+    <div class="ajouter-titre"> AJOUT D'UN RÔLE </div>
+  </div>
+
+
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-content">
+
+      <div style="transform: translateX(42px); max-width: 600px;" *ngIf="showError" class="alert alert-danger centered-element" role="alert"> {{errorMessage}}</div>
+      <br />
+
+      <div class="form-content-rows">
+        <label for="nomApp">APPLICATION :</label>
+        <select id="choix" name="choix" [(ngModel)]="rech" (ngModelChange)="getSelectedApplicationId()">
+          <option *ngFor="let app of applications" [value]="app.nom">{{ app.nom }}</option>
+        </select>
+      </div>
+
+      <div class="form-content-rows">
+        <label for="nom">RÔLE :</label>
+        <input type="text" id="nom" name="nom" [(ngModel)]="Role.nom" required>
+      </div>
+
+      <div class="form-content-rows">
+        <label for="niveau">NIVEAU :</label>
+        <input type="number" value="1" id="niveau" name="niveau" [(ngModel)]="Role.niveau" required>
+      </div>
+
+      <div class="form-content-rows">
+        <label for="niveau">DESCRIPTION :</label>
+        <input type="text" id="description" name="description" [(ngModel)]="Role.description" required>
+      </div>
+
+
+      <div class="form-content-rows">
+        <label class="no-select"></label> <div> <button type="submit" class="valider">VALIDER</button> </div>
+      </div>
+
+
+    </div>
+  </form>
+
+
+</div>
+
+

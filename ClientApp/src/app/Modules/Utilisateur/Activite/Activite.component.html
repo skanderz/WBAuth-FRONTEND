@@ -1,0 +1,97 @@
+    <div class="background-titre centered-element"> <h1> GESTION DES UTILISATEURS </h1> </div>
+    <div class="centered-element">
+
+      <div class="content">
+
+        <div style="display:flex; justify-content:center;">
+          <button class="user-button" id="user-button" [routerLink]="['/Utilisateur']" [routerLinkActive]="['user-button-active']" [routerLinkActiveOptions]="{ exact: true }">
+            <i class="fa-solid fa-list"></i>  &nbsp; LISTE
+          </button>
+          <button class="user-button" id="user-button" [routerLink]="['/Utilisateur/Acces']" [routerLinkActive]="['user-button-active']">
+            <i class="fa-solid fa-user-lock"></i> &nbsp; ACCÈS
+          </button>
+          <button class="user-button" id="user-button" [routerLink]="['/Utilisateur/Activite']" [routerLinkActive]="['user-button-active']">
+            <i class="fa-solid fa-clock-rotate-left"></i>  &nbsp; ACTIVITÉ
+          </button>
+        </div>
+
+        <h4 *ngIf="!read" style="margin-top:50px" class="alert alert-danger centered-element" role="alert">
+          Accès refusé : Vous n'êtes pas autorisé à consulter la liste des utilisateurs !
+        </h4>
+
+        <span *ngIf="read">
+
+          <div class="search-bar-and-add" style="margin:0px 25% 0px 20%;">
+            <button class="add-button" style="padding:8.5px;"> <i class="fa-solid fa-user" style="color:gold;"></i> </button>
+            <input [(ngModel)]="rechUtilisateur" (input)="RechercheUtilisateur()" class="search-input" type="text" placeholder="Saisir un nom d'utilisateur..">
+            <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
+          </div>
+
+          <hr style="color:aqua;" />
+          <div class="search-bar-and-add">
+            <button (click)="scrollToTab2()" class="add-button" style="padding:8.5px;"> <i class="fa-solid fa-angles-down" style="color:gold;"></i> </button>
+            <input [(ngModel)]="rechJournalisation" (input)="RechercheJournalisation()" class="search-input" type="text" placeholder="Saisir une date ou une application...">
+            <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
+          </div>
+          <br />
+
+          <div style="text-align: center; border: 1.5px solid #349AB5; border-radius: 4px; padding: 4px; font-weight: 500; padding: 5px 0px 0px 5px;">
+            <h4> DATE D'INSCRIPTION : {{ Utilisateur.dateInscription }} </h4>
+          </div>
+          <br />
+
+          <table style="margin-bottom:50px;" aria-labelledby="tableLabel" *ngIf="Journalisations" #tab1>
+            <thead>
+              <tr>
+                <th>APPLICATION</th>
+                <th>DATE CONNEXION</th>
+                <th>ADRESSE IP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let j of Journalisations">
+                <td> {{ j.application }}  </td>
+                <td> {{ j.dateConnexion }} </td>
+                <td> {{ j.adresseIP }} </td>
+              </tr>
+            </tbody>
+          </table>
+          <br /><br />
+
+
+          <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+          <hr style="color:aqua;" />
+          <div class="search-bar-and-add">
+            <button (click)="scrollToTab1()" class="add-button" style="padding:8.5px;"> <i class="fa-solid fa-angles-up" style="color:gold;"></i> </button>
+            <input [(ngModel)]="rechAction" (input)="RechercheAction()" class="search-input" type="text" placeholder="Saisir une date ,une application ou une action...">
+            <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
+          </div>
+          <br />
+
+          <div *ngFor="let ja of JournalisationsActions; let i = index" style="margin-bottom: -40px; border-radius: 4px; padding: 20px; font-weight: 500;" #tab2>
+            <div style="margin-bottom: 15px; border: 1.5px solid #3398B2; padding: 2px; background-color: #274a65; border-radius:5px; padding:5px 0px 0px 5px; text-align:center;">
+              <h4> DATE DE CONNEXION : {{ ja.dateConnexion }} </h4>
+            </div>
+            <table aria-labelledby="tableLabel" *ngIf="ja.actions && ja.actions.length > 0">
+              <thead>
+                <tr>
+                  <th>APPLICATION</th>
+                  <th>DATE</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let action of ja.actions">
+                  <td>{{ action.application }}</td>
+                  <td>{{ action.date }}</td>
+                  <td style="word-wrap: break-word; overflow-wrap: break-word;">{{ action.description }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <br /><br /><br /><br />
+          </div>
+
+        </span>
+      </div>
+    </div>
+

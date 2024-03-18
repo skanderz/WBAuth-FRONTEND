@@ -1,0 +1,60 @@
+<div class="background-titre">
+  <img src="../../assets/Images/WBConcept-AccueilPrincipale.png" style="width:280px; transform:translateY(7px)" />
+</div>
+
+
+<div class="ajouter-content">
+  <div class="ajouter-entete">
+    <div class="modifier-return" [routerLink]="['/Accueil']"> <i class="fa-solid fa-angles-left"></i> RETURN </div>
+    <div class="modifier-titre"> MODIFICATION DU PROFIL</div>
+  </div>
+
+  <h4 *ngIf="!read" style="margin-top:100px; margin-left:50px;" class="alert alert-danger" role="alert">
+    Accès refusé : Vous n'êtes pas autorisé à éditer les informations de votre compte !
+  </h4>
+
+    <form *ngIf="read" (ngSubmit)="onSubmit()" class="yellow-border">
+      <div class="form-content">
+
+        <div style="transform:translateX(-50px); max-width:600px;" *ngIf="showError" class="alert alert-danger centered-element" role="alert"> {{errorMessage}}</div>
+
+        <div class="form-content-rows">
+          <label for="nom">UTILISATEUR :</label>
+          <input class="yellow-border" type="text" id="userName" name="userName" [(ngModel)]="Utilisateur.userName" required>
+        </div>
+
+        <div class="form-content-rows">
+          <label for="nom">EMAIL :</label>
+          <input class="yellow-border" type="email" id="email" name="email" [(ngModel)]="Utilisateur.email" required>
+        </div>
+
+        <div class="form-content-rows">
+          <label for="nom">PRENOM :</label>
+          <input class="yellow-border" type="text" id="prenom" name="prenom" [(ngModel)]="Utilisateur.prenom" required>
+        </div>
+
+        <div class="form-content-rows">
+          <label for="nom">NOM :</label>
+          <input class="yellow-border" type="text" id="nom" name="nom" [(ngModel)]="Utilisateur.nom" required>
+        </div>
+
+        <div class="form-content-rows">
+          <label class="no-select"></label> <div> <button type="submit" class="valider">VALIDER</button> </div>
+        </div>
+
+        <div class="form-content-rows">
+          <div style="color:#E2DB28; margin-top:-7px; padding-left:27px"> ───────────────────────────────────────── </div>
+        </div>
+        <div class="form-content-rows">
+          <button style="width: 400px; margin-top: -7px; transform:translateX(-30px)" [routerLink]="['/ForgotPassword']" class="valider">CHANGER LE MOT DE PASSE</button>
+        </div>
+
+
+
+      </div>
+    </form>
+
+
+  </div>
+  <br /><br />
+

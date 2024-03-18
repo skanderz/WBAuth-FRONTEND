@@ -1,0 +1,69 @@
+<div class="background-titre"> <h1> GESTION DES UTILISATEURS </h1> </div>
+<div class="centered-element">
+
+  <div class="content">
+
+    <div style="display:flex; justify-content:center;">
+      <button class="user-button" id="user-button" [routerLink]="['/Utilisateur']" [routerLinkActive]="['user-button-active']" [routerLinkActiveOptions]="{ exact: true }">
+        <i class="fa-solid fa-list"></i>  &nbsp; LISTE
+      </button>
+      <button class="user-button" id="user-button" [routerLink]="['/Utilisateur/Acces']" [routerLinkActive]="['user-button-active']">
+        <i class="fa-solid fa-user-lock"></i> &nbsp; ACCÈS
+      </button>
+      <button class="user-button" id="user-button" [routerLink]="['/Utilisateur/Activite']" [routerLinkActive]="['user-button-active']">
+        <i class="fa-solid fa-clock-rotate-left"></i>  &nbsp; ACTIVITÉ
+      </button>
+    </div>
+
+    <h4 *ngIf="!read" style="margin-top:50px" class="alert alert-danger centered-element" role="alert">
+      Accès refusé : Vous n'êtes pas autorisé à consulter la liste des utilisateurs !
+    </h4>
+
+    <span *ngIf="read">
+
+      <div class="search-bar-and-add">
+        <button *ngIf="add" class="add-button" [routerLink]="['/Utilisateur/AjouterUtilisateur']">
+          <i class="fas fa-plus" style="color: #1ddd92;"></i>  &nbsp;  AJOUTER
+        </button>
+        <input [(ngModel)]="rech" (input)="Recherche()" class="search-input" type="text" placeholder="Rechercher ( guid ,username ,email )...">
+        <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
+      </div>
+      <br />
+
+      <table aria-labelledby="tableLabel" *ngIf="Utilisateurs">
+        <thead>
+          <tr>
+            <th>GUID</th>
+            <th>UTILISATEUR</th>
+            <th>EMAIL</th>
+            <th>NOM</th>
+            <th>PRENOM</th>
+            <th>STATUS</th>
+            <th *ngIf="modify || delete">ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let Utilisateur of Utilisateurs">
+            <td>{{ Utilisateur.id }}</td>
+            <td>{{ Utilisateur.userName }}</td>
+            <td>{{ Utilisateur.email }}</td>
+            <td>{{ Utilisateur.nom }}</td>
+            <td>{{ Utilisateur.prenom }}</td>
+            <td>
+              <span class="centered-element" appCellStyle="{{ Utilisateur.status === false ? '✖' : '✔' }}">
+                {{ Utilisateur.status === false ? '✖' : '✔' }}
+              </span>
+            </td>
+            <td *ngIf="modify || delete">
+              &nbsp; <i *ngIf="modify" (click)="onModifierClick(Utilisateur.id)" [routerLink]="['/Utilisateur/ModifierUtilisateur']" class="far fa-edit" style="color: #e6c347;"></i>
+              &nbsp; <i *ngIf="delete" (click)="deleteUtilisateur(Utilisateur.id)" class="far fa-trash-alt" style="color: #de0707;"></i>&nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </span>
+
+  </div>
+</div>
+
+

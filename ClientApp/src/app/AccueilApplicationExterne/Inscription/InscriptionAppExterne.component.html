@@ -1,0 +1,38 @@
+<div class="AccueilContent" style="display:flex; justify-content:center; align-items:center;">
+
+  <img src="../../assets/Images/PC-AccueilPrincipale.png" style="width:350px; height:350px" />
+
+  <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; margin:0px 0px 0px -20px;">
+    <img src="../../assets/Images/WBConcept-AccueilPrincipale.png" style="width:70%;" />
+
+    <div style="max-width:600px;" *ngIf="showError" class="alert alert-danger centered-element" role="alert"> {{errorMessage}}  </div>
+
+    <form class="register" [formGroup]="registerForm" autocomplete="off" novalidate (ngSubmit)="registerUser(registerForm.value)">
+      <em *ngIf="validateControl('Nom') && hasError('Nom', 'required')">Saisir le nom !</em>
+      <input class="auth-field" type="text" placeholder="NOM" id="Nom" name="Nom" formControlName="Nom" required>
+
+      <em *ngIf="validateControl('Prenom') && hasError('Prenom', 'required')">Saisir le prenom !</em>
+      <input class="auth-field" type="text" placeholder="PRENOM" id="Prenom" name="Prenom" formControlName="Prenom" required>
+
+      <em *ngIf="validateControl('userName') && hasError('userName', 'required')">Saisir le nom d'utilisateur !</em>
+      <input class="auth-field" type="text" placeholder="NOM D'UTILISATEUR" id="userName" name="userName" formControlName="userName" required>
+
+      <em *ngIf="validateControl('Email') && hasError('Email', 'email')">Saisir une adresse email valide !</em>
+      <em *ngIf="validateControl('Email') && hasError('Email', 'required')">Saisir une adresse email !</em>
+      <input class="auth-field" type="email" placeholder="E-MAIL" id="Email" name="Email" formControlName="Email" required>
+
+      <em *ngIf="validateControl('Password') && hasError('Password', 'required')">Saisir un mot de passe !</em>
+      <em *ngIf="validateControl('Password') && hasError('Password', 'minlength')">Le mot de passe doit contenir au moins 6 caractères !</em>
+      <input class="auth-field" type="password" placeholder="MOT DE PASSE" id="Password" name="Password" formControlName="Password" required>
+
+      <em *ngIf="validateControl('Confirm') && hasError('Password', 'required')">Saisir un mot de passe !</em>
+      <em *ngIf="comparePassword('Password', 'Confirm')"> Confirmation de mot de passe incorrect ! </em>
+      <input class="auth-field" type="password" placeholder="CONFIRMATION MOT DE PASSE" id="Confirm" name="Confirm" formControlName="Confirm" required>
+
+      <div style="color:#C4BDF6; margin:-10px 0px 5px 0px;"> •────────────────────────• </div>
+      <button class="auth-btn" style="margin:5px 0px 14px 0px;" [disabled]="!registerForm.valid"> S'INSCRIRE </button>
+      <div class="mdp-oublié" (click)="redirectAuthentification()"> Déjà inscrit(e) ? &nbsp; <u>S’identifier</u> </div>
+    </form>
+  </div>
+
+</div>

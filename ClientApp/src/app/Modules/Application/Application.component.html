@@ -1,0 +1,60 @@
+<div class="background-titre"> <h1> GESTION DES APPLICATIONS </h1> </div>
+<div class="centered-element">
+
+  <h4 *ngIf="!read" style="margin-top:100px" class="alert alert-danger" role="alert">
+    Accès refusé : Vous n'êtes pas autorisé à consulter la liste des applications !
+  </h4>
+
+  <div *ngIf="read" class="content">
+
+    <div class="search-bar-and-add">
+      <button *ngIf="add" class="add-button" [routerLink]="['/Application/AjouterApplication']" [routerLinkActive]="['link-active']">
+        <i class="fas fa-plus" style="color: #1ddd92;"></i>  &nbsp;  AJOUTER
+      </button>
+      <input class="search-input" type="text" placeholder="Rechercher ( nom , url )..." [(ngModel)]="rech" (input)="Recherche()">
+      <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
+    </div>
+    <br />
+
+    <table aria-labelledby="tableLabel" *ngIf="applications">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NOM DE L'APPLICATION</th>
+          <th>URL</th>
+          <th>LOGO</th>
+          <th>DESCRIPTION</th>
+          <th><div style="display: flex; justify-content: center; align-items: center;">AUTHENTIFICATION 2FA</div></th>
+          <th>
+            <div style="display: flex; justify-content: center; align-items: center;"><img class="no-select" src="../../../../assets/Images/google-icon.png" width="30px" height="30px" /> </div>
+          </th>
+          <th>
+            <div style="display: flex; justify-content: center; align-items: center;"><img class="no-select" src="../../../../assets/Images/facebook-icon.png" width="35px" height="35px" /> </div>
+          </th>
+          <th>
+            <div style="display: flex; justify-content: center; align-items: center;"><img class="no-select" src="../../../../assets/Images/linkedin-icon.png" width="35px" height="35px" /> </div>
+          </th>
+          <th *ngIf="modify || delete">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let application of applications">
+          <td>{{ application.id }}</td>
+          <td>{{ application.nom }}</td>
+          <td>{{ application.url }}</td>
+          <td>{{ application.logo }}</td>
+          <td>{{ application.description }}</td>
+          <td><span class="centered-element" appCellStyle="{{ application.auth2FA === false ? '✖' : '✔' }}">{{ application.auth2FA === false ? '✖' : '✔' }}</span></td>
+          <td><span class="centered-element" appCellStyle="{{ application.authGoogle === false ? '✖' : '✔' }}">{{ application.authGoogle === false ? '✖' : '✔' }}</span></td>
+          <td><span class="centered-element" appCellStyle="{{ application.authFacebook === false ? '✖' : '✔' }}">{{ application.authFacebook === false ? '✖' : '✔' }}</span></td>
+          <td><span class="centered-element" appCellStyle="{{ application.authLinkedIn === false ? '✖' : '✔' }}">{{ application.authLinkedIn === false ? '✖' : '✔' }}</span></td>
+          <td *ngIf="modify || delete">
+            &nbsp; <i *ngIf="modify" (click)="onModifierClick(application.id)" [routerLink]="['/Application/ModifierApplication']" [routerLinkActive]="['link-active']" class="far fa-edit" style="color: #e6c347;"></i>
+            &nbsp; <i *ngIf="delete" (click)="deleteApplication(application.id)" class="far fa-trash-alt" style="color: #de0707;"></i>&nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

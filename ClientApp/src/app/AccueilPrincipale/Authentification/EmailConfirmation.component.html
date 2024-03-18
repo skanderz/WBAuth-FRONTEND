@@ -1,0 +1,20 @@
+<div class="AccueilContent" style="display:flex; justify-content:center; align-items:center;">
+
+  <img src="../../assets/Images/PC-AccueilPrincipale.png" style="width:350px; height:350px" />
+
+  <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; margin:0px 0px 0px -20px;">
+    <img src="../../assets/Images/WBConcept-AccueilPrincipale.png" style="max-width:325px;" />
+    <div style="color:#FFF; margin-bottom: 20px;"> ──────────────────────────────────── </div>
+    <em *ngIf="showError" class="alert alert-danger" role="alert"> {{errorMessage}} </em>
+    <em *ngIf="showSuccess" class="alert alert-success" role="alert">
+      Votre email est confirmé avec succès. Veuillez <a [routerLink]="['/Authentification']"> cliquer ici pour se connecter ! </a>
+    </em>
+
+  </div>
+</div>
+
+
+
+
+
+

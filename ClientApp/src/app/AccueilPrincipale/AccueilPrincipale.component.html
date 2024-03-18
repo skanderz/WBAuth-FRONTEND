@@ -1,0 +1,20 @@
+<div class="AccueilContent" style="display:flex; justify-content:center; align-items:center;">
+
+  <img src="../../assets/Images/PC-AccueilPrincipale.png" style="width:350px; height:350px" />
+  <div *ngIf='!isUserAuthenticated' style="display:flex; flex-direction:column; justify-content:flex-start; align-items:start; margin:0px 0px 40px 50px;">
+
+    <img src="../../assets/Images/WBConcept-AccueilPrincipale.png" style="width:70%;" />
+    <div style="display: flex; justify-content:center; align-items:center; width:67%; margin-top:16px;">
+      <div class="cnx-btn" [routerLink]="['/Authentification']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        CONNEXION
+      </div>
+      <div style="width:6%;"></div>
+      <div class="inscri-btn" [routerLink]="['/Inscription']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        INSCRIPTION
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf='isUserAuthenticated'> <h1> DEJA CONNECTE ! </h1> </div>
+
+</div>

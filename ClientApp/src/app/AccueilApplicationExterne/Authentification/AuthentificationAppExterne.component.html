@@ -1,0 +1,46 @@
+<div class="AccueilContent" style="display:flex; justify-content:center; align-items:center;">
+
+  <img class="no-select" src="../../assets/Images/PC-AccueilPrincipale.png" style="width:350px; height:350px" />
+
+  <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; margin:0px 0px 0px -20px;">
+    <img class="no-select" src="../../assets/Images/WBConcept-AccueilPrincipale.png" style="width:70%;" />
+
+    <div style="max-width:600px; transform:translateX(-7px)" *ngIf="showError" class="alert alert-danger centered-element" role="alert"> {{errorMessage}}  </div>
+
+    <form class="register" [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="loginUser(loginForm.value)">
+
+      <em *ngIf="validateControl('userName') && hasError('userName', 'required')">Saisir le nom d'utilisateur/email !</em>
+      <input class="auth-field" type="text" placeholder="NOM D'UTILISATEUR/EMAIL" id="userName" name="userName" formControlName="userName" required>
+      <em *ngIf="validateControl('password') && hasError('password', 'required')">Saisir le mot de passe !</em>
+      <input class="auth-field" type="password" placeholder="MOT DE PASSE" id="mdp" name="mdp" formControlName="password" required>
+
+      <button id="auth-btn" type="submit" class="auth-btn" [disabled]="!loginForm.valid">SE CONNECTER</button>
+      <div class="mdp-oublié" style="transform:translateY(-4px)" (click)="redirectForgotPassword()">  Mot de passe oublié ? </div>
+
+      <div style="margin-top:7px" class="centered-element">
+        <div class="rs-signin">
+          <div id="cnx-google"> </div>
+          <img src="../../../../assets/Images/google-icon.png" width="40px" height="40px" style="box-shadow:rgb(255,61,0,0.4) 7px 3px; background-color: #F0F8FF; border-radius: 100%; padding: 5px; cursor: pointer; " />
+        </div>
+        <div style="width:10%;"></div>
+        <div class="rs-signin">
+          <div class="centered-element" (click)="cnxFacebook()" style="background-color: #F0F8FF; box-shadow:rgb(58,87,148,0.7) 7px 3px; border-radius: 100%; cursor: pointer; width: 40px; height: 40px; ">
+            <i class="fa-brands fa-facebook-f fa-xl " style="color: #3A5794;"></i>
+          </div>
+        </div>
+        <div style="width:10%;"></div>
+        <div class="rs-signin">
+          <div class="centered-element" (click)="cnxLinkedIn()" style="background-color: #F0F8FF; box-shadow:rgb(10,102,194,0.7) 7px 3px; border-radius: 100%; cursor: pointer; width: 40px; height: 40px; ">
+             <i class="fa-brands fa-linkedin-in fa-lg" style="color: #0a66c2;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div style="color:#C4BDF6; margin-bottom: 10px;"> •─────────────────────────• </div>
+      <div class="auth-inscri-btn" (click)="redirectInscription()"> CRÉER NOUVEAU COMPTE </div>
+    </form>
+
+
+  </div>
+
+</div>

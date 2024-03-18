@@ -1,0 +1,81 @@
+<div class="background-titre"> <h1> GESTION DES APPLICATIONS </h1> </div>
+
+
+<div class="ajouter-content">
+
+  <div class="ajouter-entete">
+    <div class="ajouter-return" [routerLink]="['/Application']"> <i class="fa-solid fa-angles-left"></i> RETURN </div>
+    <div class="ajouter-titre"> AJOUT D'UNE APPLICATION </div>
+  </div>
+
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-content">
+
+      <div style="transform: translateX(42px); max-width: 600px;" *ngIf="showError" class="alert alert-danger centered-element" role="alert"> {{errorMessage}}</div>
+      <br />
+
+      <div class="form-content-rows">
+        <label for="nom">NOM :</label>
+        <input type="text" id="nom" name="nom" [(ngModel)]="application.nom" required>
+      </div>
+
+      <div class="form-content-rows">
+        <label for="nom">URL :</label>
+        <input type="text" id="url" name="url" [(ngModel)]="application.url" required>
+      </div>
+
+      <div class="form-content-rows">
+        <label for="description">DESCRIPTION :</label>
+        <div style="display: flex; flex-direction: column;">
+          <textarea id="description" name="description" rows="3" [(ngModel)]="application.description" required></textarea>
+        </div>
+      </div>
+
+      <div class="form-content-rows" style="margin-top:35px;">
+        <label style="transform:translateY(-2px)" for="logo">LOGO :</label>
+        <label class="custom-file-input">
+          <input type="file" id="logo" name="logo" accept="image/*" [(ngModel)]="application.logo" cursor="pointer" (change)="onFileSelected($event)">
+          <div class="custom-file-label"><i class="fa-solid fa-upload"></i> Choisir un fichier</div>
+        </label>
+      </div>
+      <!-- <div id="file-status"></div>  -->
+
+      <div class="form-content-rows">
+        <label class="no-select" for="options" style="transform:translateY(-5px)">OPTIONS : </label>
+        <div style="margin-top:3px;" class="check" (click)="toggleAuth2FA()" id="auth2fa-check">
+          <i class="fa-solid" [ngClass]="{'fa-check': !application.auth2FA, 'fa-times': application.auth2FA}"></i>
+        </div>
+        <div style="margin-top:3px;" class="auth2fa no-select"> Authentification 2FA </div>
+      </div>
+
+      <div class="form-content-rows" style="margin:25px 0px 0px 0px;">
+        <label class="no-select"></label>
+        <div class="check2" style="margin-right:5px;" (click)="toggleAuthGoogle()">
+          <i class="fa-solid" [ngClass]="{'fa-check': !application.authGoogle, 'fa-times': application.authGoogle}"></i>
+        </div>
+        <img class="no-select" src="../../../../assets/Images/google-icon.png" width="40px" height="40px" style="margin-top:3px;" /> <div class="no-select" style="display:inline;"> &nbsp; &nbsp; </div>
+
+        <div class="check3" style="margin-right:5px;" (click)="toggleAuthFacebook()">
+          <i class="fa-solid" [ngClass]="{'fa-check': !application.authFacebook, 'fa-times': application.authFacebook}"></i>
+        </div>
+        <img class="no-select" src="../../../../assets/Images/facebook-icon.png" width="45px" height="45px" /> <div class="no-select" style="display:inline;"> &nbsp; &nbsp; </div>
+
+        <div class="check4" style="margin-right:5px;" (click)="toggleAuthLinkedIn()">
+          <i class="fa-solid" [ngClass]="{'fa-check': !application.authLinkedIn, 'fa-times': application.authLinkedIn}"></i>
+        </div>
+        <img class="no-select" src="../../../../assets/Images/linkedin-icon.png" width="45px" height="45px" /> <div class="no-select" style="display:inline;"> &nbsp; &nbsp; </div>
+      </div>
+
+      <div class="form-content-rows">
+        <label class="no-select"></label> <div> <button type="submit" class="valider">VALIDER</button> </div>
+      </div>
+
+
+    </div>
+  </form>
+
+
+</div>
+
+

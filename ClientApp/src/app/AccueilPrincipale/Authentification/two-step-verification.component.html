@@ -1,0 +1,27 @@
+<div class="AccueilContent" style="display:flex; justify-content:center; align-items:center;">
+
+  <img src="../../assets/Images/PC-AccueilPrincipale.png" style="width:350px; height:350px" />
+
+  <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; margin:0px 0px 0px -20px;">
+    <img src="../../assets/Images/WBConcept-AccueilPrincipale.png" style="width:70%;" />
+
+     <div style="max-width:600px;" *ngIf="showError" class="alert alert-danger centered-element" role="alert"> <span [innerHTML]="errorMessage"></span>  </div>
+     <div style="max-width:600px;" *ngIf="showSuccess" class="alert alert-success centered-element" role="alert"> Verification effectuée ! </div>
+
+    <form class="register" [formGroup]="twoStepForm" autocomplete="off" novalidate (ngSubmit)="loginUser(twoStepForm.value)">
+
+      <em *ngIf="validateControl('twoFactorCode') && hasError('twoFactorCode', 'required')">Saisir le code de verification !</em>
+      <input class="auth-field" placeholder="CODE" type="text" id="twoFactorCode" formControlName="twoFactorCode" required>
+
+      <button id="forgotPasswordBtn" type="submit" class="auth-btn" [disabled]="!twoStepForm.valid">VALIDER</button>
+      <div style="color:#C4BDF6; padding-top: 5px"> •────────────────────────• </div>
+      <div class="mdp-oublié" [routerLink]="['/Authentification']">  Revenir à l'écran de connexion </div>
+
+    </form>
+
+  </div>
+</div>
+
+
+
+

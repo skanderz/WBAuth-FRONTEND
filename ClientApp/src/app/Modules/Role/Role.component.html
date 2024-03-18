@@ -1,0 +1,50 @@
+<div class="background-titre"> <h1> GESTION DES RÔLES </h1> </div>
+<div class="centered-element">
+
+  <h4 *ngIf="!read" style="margin-top:100px" class="alert alert-danger" role="alert">
+    Accès refusé : Vous n'êtes pas autorisé à consulter la liste des roles !
+  </h4>
+
+  <div *ngIf="read" class="content">
+
+    <div class="search-bar-and-add">
+      <button *ngIf="add" class="add-button" [routerLink]="['/Role/AjouterRole']">
+        <i class="fas fa-plus" style="color: #1ddd92;"></i>  &nbsp;  AJOUTER
+      </button>
+      <input [(ngModel)]="rech" (input)="Recherche()" class="search-input" type="text" placeholder="Rechercher...">
+      <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
+    </div>
+    <br />
+
+    <div class="choix-application">
+      <label style="transform:translateX(-3px)" for="nom">APPLICATION :</label>
+      <select id="choix" name="choix" [(ngModel)]="IdApp" (ngModelChange)="loadRoles()">
+        <option *ngFor="let app of applications" [value]="app.id">{{ app.nom }}</option>
+      </select>
+    </div>
+
+
+    <table aria-labelledby="tableLabel" *ngIf="Roles">
+      <thead>
+        <tr>
+          <th>ROLE</th>
+          <th>NIVEAU</th>
+          <th>DESCRIPTION</th>
+          <th *ngIf="modify || delete">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let Role of Roles">
+          <td>{{ Role.nom }}</td>
+          <td>{{ Role.niveau }}</td>
+          <td>{{ Role.description }}</td>
+          <td *ngIf="modify || delete">
+            &nbsp; <i *ngIf="modify" (click)="onModifierClick(Role.id)" [routerLink]="['/Role/ModifierRole']" class="far fa-edit" style="color: #e6c347;"></i>
+            &nbsp; <i *ngIf="delete" (click)="deleteRole(Role.id)" class="far fa-trash-alt" style="color: #de0707;"></i>&nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="background-titre"> <h1> GESTION DES UTILISATEURS </h1> </div>
+
+
+<div class="ajouter-content">
+
+  <div class="ajouter-entete">
+    <div class="ajouter-return" [routerLink]="['/Utilisateur']"> <i class="fa-solid fa-angles-left"></i> RETURN </div>
+    <div class="ajouter-titre"> AJOUT D'UN UTILISATEUR </div>
+  </div>
+
+
+    <form [formGroup]="registerForm" novalidate (ngSubmit)="registerUser(registerForm.value)">
+      <div class="form-content">
+
+        <div style="transform:translateX(35px); max-width:600px;" *ngIf="showError" class="alert alert-danger centered-element" role="alert"> {{errorMessage}}  </div>
+
+        <em class="centered-adduser" *ngIf="validateControl('Prenom') && hasError('Prenom', 'required')">Saisir le prenom !</em>
+        <div class="form-content-rows">
+          <label style="transform:translateY(-4px)" for="nom">PRENOM :</label>
+          <input type="text" id="prenom" name="prenom" formControlName="Prenom" required>
+        </div>
+
+        <em class="centered-adduser" *ngIf="validateControl('Nom') && hasError('Nom', 'required')">Saisir le nom !</em>
+        <div class="form-content-rows">
+          <label style="transform:translateY(-4px) " for="nom">NOM :</label>
+          <input type="text" id="nom" name="nom" formControlName="Nom" required>
+        </div>
+
+        <em class="centered-adduser" *ngIf="validateControl('userName') && hasError('userName', 'required')">Saisir le nom d'utilisateur !</em>
+        <div class="form-content-rows">
+          <label style="transform:translateY(-4px)" for="nom">UTILISATEUR :</label>
+          <input type="text" id="userName" name="userName" formControlName="userName" required>
+        </div>
+
+        <em class="centered-adduser" *ngIf="validateControl('Email') && hasError('Email', 'email')">Saisir une adresse email valide !</em>
+        <em class="centered-adduser" *ngIf="validateControl('Email') && hasError('Email', 'required')">Saisir une adresse email !</em>
+        <div class="form-content-rows">
+          <label style="transform:translateY(-4px)" for="nom">EMAIL :</label>
+          <input type="email" id="email" name="email" formControlName="Email" required>
+        </div>
+
+        <em class="centered-adduser" *ngIf="validateControl('Password') && hasError('Password', 'required')">Saisir un mot de passe !</em>
+        <em class="centered-adduser" *ngIf="validateControl('Password') && hasError('Password', 'minlength')">Le mot de passe doit contenir au moins 6 caractères !</em>
+        <div class="form-content-rows">
+          <label style="transform:translateY(-4px)" for="password">MOT DE PASSE :</label>
+          <input type="password" id="Password" name="Password" formControlName="Password" required>
+        </div>
+
+        <em class="centered-adduser" *ngIf="validateControl('Confirm') && hasError('Password', 'required')">Saisir un mot de passe !</em>
+        <em class="centered-adduser" *ngIf="comparePassword('Password', 'Confirm')"> Confirmation de mot de passe incorrect ! </em>
+        <div class="form-content-rows">
+          <label style="transform:translateY(-4px)" for="password">CONFIRMATION MOT DE PASSE :</label>
+          <input type="password" id="Confirm" name="Confirm" formControlName="Confirm" required>
+        </div>
+
+
+        <div class="form-content-rows">
+          <label class="no-select"></label> <div>
+            <button type="submit" class="valider" [disabled]="!registerForm.valid">VALIDER</button>
+          </div>
+        </div>
+
+
+      </div>
+  </form>
+
+</div>
+
+

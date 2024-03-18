@@ -1,0 +1,57 @@
+<div class="background-titre"> <h1> GESTION DES FONCTIONS </h1> </div>
+
+
+<div class="ajouter-content">
+
+  <div class="ajouter-entete">
+    <div class="ajouter-return" [routerLink]="['/Fonction']"> <i class="fa-solid fa-angles-left"></i> RETURN </div>
+    <div class="ajouter-titre"> AJOUT D'UNE FONCTION </div>
+  </div>
+
+
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-content">
+
+      <div style="transform: translateX(42px); max-width: 600px;" *ngIf="showError" class="alert alert-danger centered-element" role="alert"> {{errorMessage}}</div>
+      <br />
+
+      <div class="form-content-rows">
+        <label for="nom">APPLICATION :</label>
+        <select id="choix" name="choix" [(ngModel)]="rech" (ngModelChange)="getSelectedApplicationId()">
+          <option *ngFor="let app of applications" [value]="app.nom">{{ app.nom }}</option>
+        </select>
+      </div>
+
+
+      <div class="form-content-rows">
+        <label for="nom">TYPE :</label>
+        <select id="choix" name="choix" [(ngModel)]="fonction.type">
+          <option value="Multifonctions">Multifonctions</option>
+          <option value="Fonction Unique">Fonction Unique</option>
+        </select>
+      </div>
+
+      <div class="form-content-rows">
+        <label for="nom">NOM :</label>
+        <input type="text" id="nom" name="nom" [(ngModel)]="fonction.nom" required>
+      </div>
+
+      <div class="form-content-rows">
+        <label for="description">DESCRIPTION :</label>
+        <div style="display: flex; flex-direction: column;">
+          <textarea id="description" name="description" rows="4" [(ngModel)]="fonction.description" required></textarea>
+        </div>
+      </div>
+
+      <div class="form-content-rows">
+        <label class="no-select"></label> <div> <button type="submit" class="valider">VALIDER</button> </div>
+      </div>
+
+    </div>
+   </form>
+
+
+</div>
+
+

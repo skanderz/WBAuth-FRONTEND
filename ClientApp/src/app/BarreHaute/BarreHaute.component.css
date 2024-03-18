@@ -1,0 +1,127 @@
+header{
+    position:sticky;
+    z-index:101;
+    top:0px;
+    right:0px;
+}
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+html {  font-size: 24px;}
+@media (min-width: 768px) {  html {  font-size: 16px;  }   }
+
+
+.containerBH {
+  position :absolute;
+  right: 65px;
+  top: 23px;
+  z-index: 100;
+}
+
+.logout{
+   transform:translateY(-2px);
+}
+
+
+.userName {
+  font-family: "Clear Sans", sans-serif;
+  font-size: 17px;
+  color: white;
+  font-weight: 600;
+  line-height: 0.5;
+}
+
+.role {
+  font-family: "Trebuchet MS";
+  font-size: 11.5px;
+  color: white;
+  font-weight: 700;
+  letter-spacing:1px;
+}
+
+.navbar-container {
+  overflow: hidden;
+  border-bottom: solid 1px #366480;
+}
+
+.navbar {
+  left: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  background-image: url('../../assets/Images/ArrierePlanBarreHaute.jpg');
+  background-size: 530px;
+  background-repeat: no-repeat;
+  index-z: 1;
+  box-shadow: 0 .05rem .85rem rgb(59,169,197,0.4);
+  left: 135px;
+}
+
+
+.flex-grow { transform: translateX(-90px); z-index:3;}
+
+
+.textnavbar:hover {
+   border-color: aquamarine;
+   color: aquamarine;
+   box-shadow: 0px 0px 20px rgb(59,169,197,0.7);
+}
+
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 4px 0px 0px 4px;
+  z-index: 20;
+  box-shadow: -10px .05rem .85rem rgb(59,169,197,0.4);
+  width: 150px;
+  height: 150px;
+  background-color: #0E1F31;
+  border-right: solid 1px #366480;
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------*/
+
+.dropbtn {
+  background-color: transparent;
+  color: #E0C44E;
+  padding: 10px 13px 8px 13px;
+  font-size: 16px;
+  border: solid 2px #E0C44E;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: block;
+  right: 100%;
+  top: 0%;
+  position: absolute;
+  background-color: rgb(66,43,15);
+  border: solid 3px #887627;
+  min-width: 160px;
+  max-height: 200px;
+  z-index: 1;
+  border-radius: 10px;
+  padding: 2px;
+}
+
+.dropdown-content span {
+  color: white;
+  background-color:rgb(66,43,15);
+  font-weight: 500;
+  padding: 2px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown-content span:hover {
+  background-color: #111;
+ }

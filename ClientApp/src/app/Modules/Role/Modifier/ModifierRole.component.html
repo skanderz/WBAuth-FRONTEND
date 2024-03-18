@@ -1,0 +1,50 @@
+<div class="background-titre"> <h1> GESTION DES RÔLES </h1> </div>
+
+
+<div class="ajouter-content">
+
+  <div class="ajouter-entete">
+    <div class="modifier-return" [routerLink]="['/Role']"> <i class="fa-solid fa-angles-left"></i> RETURN </div>
+    <div class="modifier-titre"> MODIFICAITON DU RÔLE </div>
+  </div>
+
+
+  <form (ngSubmit)="onSubmit()" class="yellow-border">
+    <div class="form-content">
+
+      <div style="transform: translateX(42px); max-width:600px;" *ngIf="showError" class="alert alert-danger centered-element" role="alert"> {{errorMessage}}</div>
+      <br />
+
+      <div class="form-content-rows">
+        <label for="nomApp">APPLICATION :</label>
+        <input class="yellow-border" type="text" id="nomApp" name="nomApp" [(ngModel)]="application.nom" style="cursor:not-allowed" readonly>
+      </div>
+
+      <div class="form-content-rows">
+        <label for="nom">RÔLE :</label>
+        <input class="yellow-border" type="text" id="nom" name="nom" [(ngModel)]="Role.nom" required>
+      </div>
+
+      <div class="form-content-rows">
+        <label for="nom">NIVEAU :</label>
+        <input class="yellow-border" type="number" id="niveau" name="niveau" [(ngModel)]="Role.niveau" required>
+      </div>
+
+      <div class="form-content-rows">
+        <label for="description">DESCRIPTION :</label>
+        <input class="yellow-border" type="text" id="description" name="description" [(ngModel)]="Role.description" required>
+      </div>
+
+
+      <div class="form-content-rows">
+        <label class="no-select"></label> <div> <button type="submit" class="valider">VALIDER</button> </div>
+      </div>
+
+
+    </div>
+  </form>
+
+
+</div>
+
+

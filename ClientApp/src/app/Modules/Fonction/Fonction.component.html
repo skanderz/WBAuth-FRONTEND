@@ -1,0 +1,54 @@
+<div class="background-titre"> <h1> GESTION DES FONCTIONS </h1> </div>
+<div class="centered-element">
+
+  <h4 *ngIf="!read" style="margin-top:100px" class="alert alert-danger" role="alert">
+    Accès refusé : Vous n'êtes pas autorisé à consulter la liste des fonctions !
+  </h4>
+
+  <div *ngIf="read" class="content">
+
+    <div class="search-bar-and-add">
+      <button *ngIf="add" class="add-button" [routerLink]="['/Fonction/AjouterFonction']">
+        <i class="fas fa-plus" style="color: #1ddd92;"></i>  &nbsp;  AJOUTER
+      </button>
+      <input [(ngModel)]="rech" (input)="Recherche()" class="search-input" type="text" placeholder="Rechercher...">
+      <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
+    </div>
+    <br />
+
+    <div class="choix-application">
+      <label style="transform:translateX(-3px)" for="nom">APPLICATION :</label>
+      <select id="choix" name="choix" [(ngModel)]="IdApp" (ngModelChange)="loadFonctions()">
+        <option *ngFor="let app of applications" [value]="app.id">{{ app.nom }}</option>
+      </select>
+    </div>
+
+
+    <table aria-labelledby="tableLabel" *ngIf="fonctions">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NOM</th>
+          <th>DESCRIPTION</th>
+          <th>TYPE</th>
+          <th *ngIf="modify || delete">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fonction of fonctions">
+          <td>{{ fonction.id }}</td>
+          <td>{{ fonction.nom }}</td>
+          <td>{{ fonction.description }}</td>
+          <td>{{ fonction.type }}</td>
+          <td *ngIf="modify || delete">
+            &nbsp; <i *ngIf="modify" (click)="onModifierClick(fonction.id)" [routerLink]="['/Fonction/ModifierFonction']" class="far fa-edit" style="color: #e6c347;"></i>
+            &nbsp; <i *ngIf="delete" (click)="deleteFonction(fonction.id)" class="far fa-trash-alt" style="color: #de0707;"></i>&nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+

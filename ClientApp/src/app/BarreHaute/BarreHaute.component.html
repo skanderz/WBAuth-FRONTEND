@@ -1,0 +1,35 @@
+<header>
+
+  <div class="logo"> <img src="../../assets/Images/logo.jpg" style="width: 140px; height: 140px;"/></div>  
+
+  <div class="background-container"></div>
+  <div class="navbar-container">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black ">
+      <div class="containerBH">
+        <a class="navbar-brand" [routerLink]="['/Accueil']"> </a>
+
+        <div style="transform:translateX(-20px);" class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+          <ul class="navbar-nav flex-grow">
+
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <div class="centered-element userName"> {{ usernamebar }} </div>
+              <div style="margin-top:4px;"></div>
+              <div style="color:#40C1DD">  ────────────── </div>
+              <div class="centered-element role"> {{ rolebar }} </div>
+            </li>
+            <li> &nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li class="dropdown" (mouseleave)="closeDropdown()"> 
+              <button class="dropbtn" (click)="toggleDropdown()"><i class="fa-solid fa-angles-down fa-fade"></i></button>
+              <div class="dropdown-content" *ngIf="isDropdownOpen">
+                <span href="#" (click)="profil()"><i class="fa-solid fa-user-pen"></i>&nbsp;Profil</span>
+                <span href="#" (click)="logout()"><i class="fa-solid fa-door-open"></i>&nbsp;Deconnexion</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
